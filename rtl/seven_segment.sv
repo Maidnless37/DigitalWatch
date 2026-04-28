@@ -7,6 +7,8 @@
 //  digit [3:0]     - Hexadecimal Digit to Display (0x0 to 0xF)
 //  blank           - When High, All Segments Off
 //  segments [6:0]  - Segment Outputs (g, f, e, d, c, b, a)
+//
+// ACTIVE_LOW Inverts segments_active_high if Seven-Segment Display is Active Low Logic
 
 `timescale 1ns / 1ps
 
@@ -41,6 +43,6 @@ module seven_segment #(
     endcase
   end
 
-  assign segments = (ACTIVE_LOW != 0) ? ~segments_active_high : segments_active_high; // Inverts segments_active_high if Seven-Segment Display is Controlled by Active Low Logic
+  assign segments = (ACTIVE_LOW != 0) ? ~segments_active_high : segments_active_high;
 
 endmodule
