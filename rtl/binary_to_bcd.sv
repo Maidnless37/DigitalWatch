@@ -8,7 +8,7 @@ module binary_to_bcd (
     output logic [3:0] ones   // Decimal Ones Digit (BCD)
 );
 
-  assign tens = 4'(bin / 7'd10);
-  assign ones = 4'(bin % 7'd10);
+  assign tens = 4'(bin / 7'd10);  // Cast to 4-bits (match bit width of tens)
+  assign ones = 4'(bin % 7'd10);  // Divide by 7-bits (match bit width of bin)
 
 endmodule
