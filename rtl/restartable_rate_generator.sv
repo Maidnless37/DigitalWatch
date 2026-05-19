@@ -8,13 +8,16 @@
 // Module Counts Cycles when Run = 1
 // After the Required Number of Cycles, Tick = 1 for One Cycle
 
-// $clog(x) = ceiling(log2(x))
+// $clog2(x) = ceiling(log2(x))
 // The minimum number of bits required to represent x states
-// $clog(2) = ceiling(log2(2)) = 1
-// $clog(4) = ceiling(log2(4)) = 2
-// $clog(8) = ceiling(log2(8)) = 3
-// Rounds Up --> $clog(3) = ceiling(log2(3)) = 2.32 = 3
-// Note that $clog(1) = 0
+// $clog2(2) = ceiling(log2(2)) = 1
+// $clog2(4) = ceiling(log2(4)) = 2
+// $clog2(8) = ceiling(log2(8)) = 3
+// Rounds Up --> $clog2(3) = ceiling(log2(3)) = 1.585 = 2
+// Note that $clog2(1) = 0
+
+// Initial Delay = CYCLE_COUNT - 1
+// Subsequent Ticks occur every CYCLE_COUNT Rising Edges
 
 `timescale 1ns / 1ps
 
