@@ -1,10 +1,14 @@
 // Modulo N Counter
 
+// Reset the Count is rst is True
+// Continue the Count if enable is True
+// Reset the Count if count = Max
+
 `timescale 1ns / 1ps
 
 module mod_n_counter #(
-    parameter int N = 4,
-    parameter int WIDTH = 2
+    parameter int N = 4,  // Maximum Number to Count To
+    parameter int WIDTH = 2  // Width of Maximum Number
 ) (
     input logic clk,
     input logic rst,
@@ -12,13 +16,14 @@ module mod_n_counter #(
     output logic [WIDTH - 1:0] count
 );
 
-  localparam logic [WIDTH - 1:0] Max = WIDTH'(N - 1);
-  localparam logic [WIDTH - 1:0] Inc = WIDTH'(1);  // Increment Count
+  localparam logic [WIDTH - 1:0] Max = WIDTH'(N - 1);  // Determine Maximum Count
+  localparam logic [WIDTH - 1:0] Inc = WIDTH'(1);  // Determine Increment
 
   logic [WIDTH - 1:0] next_count;
 
   initial count = '0;
 
+  // rst takes priority over enable so the counter can always be forced back to zero (no ambiguity)
   always_ff @(posedge clk)
     if (rst) count <= '0;
     else if (enable) count <= next_count;
