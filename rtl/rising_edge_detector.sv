@@ -4,6 +4,8 @@
 // Pulse continues until sig_in = 0
 // Only outputs a 1 whilst prievious value is 0 and current value is 1
 
+// Essentially converts a signal staying at 1 (11111) into (10000)
+
 `timescale 1ns / 1ps
 
 module rising_edge_detector (
