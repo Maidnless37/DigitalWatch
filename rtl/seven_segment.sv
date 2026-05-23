@@ -10,6 +10,9 @@
 //
 // ACTIVE_LOW Inverts segments_active_high if Seven-Segment Display is Active Low Logic
 
+// Takes the active-low nature of the seven-segment displays into account
+// Input a digit up to 15 (max hex representation) and it will output it on the displays
+
 `timescale 1ns / 1ps
 
 module seven_segment #(
@@ -44,6 +47,8 @@ module seven_segment #(
       endcase
   end
 
+  // Parameter allows active-low to be true 1 or false 0
+  // The below code accounts for this so if active-low is taken into account in our code, it works
   assign segments = (ACTIVE_LOW != 0) ? ~segments_active_high : segments_active_high;
 
 endmodule
