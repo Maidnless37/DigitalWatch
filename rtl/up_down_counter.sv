@@ -1,3 +1,5 @@
+// Parametrised Up-Down Counter with Enable
+
 `timescale 1ns / 1ps
 
 // If enable = 1 and up = 1, +1 to count every clk cycle
