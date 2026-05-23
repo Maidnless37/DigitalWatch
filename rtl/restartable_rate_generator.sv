@@ -19,6 +19,9 @@
 // Initial Delay = CYCLE_COUNT - 1
 // Subsequent Ticks occur every CYCLE_COUNT Rising Edges
 
+// Whilst run = 1, the clock counts
+// When the count reaches the limit, emit a one cycle pulse
+
 `timescale 1ns / 1ps
 
 module restartable_rate_generator #(
@@ -31,10 +34,11 @@ module restartable_rate_generator #(
 
   logic tick_qualifier;
 
+  // Mod counter changes after the rising edge of clk, this ensures tick doesn't immediately occur
   logic running = 1'b0;
-  always_ff @(posedge clk) running <= run;
+  always_ff @(posedge clk) running <= run;  // Causes a delay of 1
 
-  assign tick = running && tick_qualifier;
+  assign tick = running && tick_qualifier; // Ready to count to the next number and ready for a tick
 
   generate
     if (CYCLE_COUNT > 1) begin : g_general  // If a parameter has a certain value, build this
@@ -44,13 +48,13 @@ module restartable_rate_generator #(
       logic enable_count;
       logic [CountWidth - 1:0] count;
       mod_n_counter #(
-          .N(CYCLE_COUNT),
+          .N(CYCLE_COUNT),  // Maximum number to count to
           .WIDTH(CountWidth)
       ) u_count (
           .clk(clk),
-          .rst(rst_count),
-          .enable(enable_count),
-          .count(count)
+          .rst(rst_count),  // Send a 1 to reset the count
+          .enable(enable_count),  // You are allowed to count
+          .count(count)  // The current count value
       );
 
       assign rst_count = !run;  // No width specified as this is a 1-bit control variable
