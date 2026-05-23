@@ -1,6 +1,8 @@
 // Rising-Edge Detector
 
-// Detects a 0 -> 1 Transition (Rising Edge of the Clock) and Generates a Short Pulse
+// Detects a 0 -> 1 Transition (Rising Edge of a Variable) and Generates a Short Pulse
+// Pulse continues until sig_in = 0
+// Only outputs a 1 whilst prievious value is 0 and current value is 1
 
 `timescale 1ns / 1ps
 

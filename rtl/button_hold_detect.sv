@@ -1,5 +1,8 @@
 // Button Hold Detect
 
+// Once a button has been pressed for HOLD_CYCLES length of time, module outputs a logic high
+// Logic high continues until the button is released
+
 `timescale 1ns / 1ps
 
 module button_hold_detect #(
