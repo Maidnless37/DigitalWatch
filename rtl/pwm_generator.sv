@@ -33,10 +33,12 @@ module pwm_generator #(
       .count(count)
   );
 
-  int count_int;  // Make a variable count to match the width of DUTY_CYCLES
-  always_comb count_int = int'(count);
-
-  // If count_int < DUTY_CYCLES, Output remains High
-  assign pwm_out = (count_int < DUTY_CYCLES);
+  always_comb begin
+    if (DUTY_CYCLES >= PERIOD_CYCLES) begin
+      pwm_out = 1'b1;
+    end else begin
+      pwm_out = count < CountWidth'(DUTY_CYCLES);
+    end
+  end
 
 endmodule
