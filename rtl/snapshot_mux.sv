@@ -19,12 +19,14 @@ module snapshot_mux #(
   logic [WIDTH - 1:0] snapshot = '0;
 
   // Capture d on each rising clock edge whilse hold is 0
+  // Save that value in snapshot for the assign statement below
   always_ff @(posedge clk) begin
     if (!hold) begin  // Begin if hold is 0
       snapshot <= d;  // Take snapshot of input D
     end
   end
 
+  // Remeber that snapshot is a previous value of the input
   assign q = hold ? snapshot : d;  // If hold is 1, output = snapshot, else output the input
 
 endmodule
